@@ -15,9 +15,8 @@ import java.util.List;
  */
 public class FileManager {
     
-    private final Charset UTF8 = StandardCharsets.UTF_8;
+    private final Charset UTF_8 = StandardCharsets.UTF_8;
     private Path filePath;
-    private List<String> fileLines;
     
     public FileManager(Path filePath) {
         this.filePath = filePath;
@@ -30,15 +29,9 @@ public class FileManager {
     public FileManager(String fileName) {
         this.filePath = Paths.get(fileName);
     }
-        
-    private void readFile() throws IOException {
-        fileLines = Files.readAllLines(filePath, UTF8);
-    }
     
     private void writeFile(List<String> lines) throws IOException {
-        readFile();
-        fileLines.addAll(lines);
-        Files.write(filePath, fileLines, UTF8, StandardOpenOption.CREATE);
+        Files.write(filePath, lines, UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 
 }

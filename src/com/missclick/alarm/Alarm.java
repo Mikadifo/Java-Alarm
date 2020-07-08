@@ -10,9 +10,9 @@ public class Alarm {
     private int hour;
     private int minute;
     private int second;
+    private String text;
     private int numSound;
     private boolean on;
-    private String text;
     
     //Cons
 
@@ -20,14 +20,14 @@ public class Alarm {
     public Alarm() {
     }
 
-    public Alarm(int day, int hour, int minute, int second, int numSound, boolean on, String text) {
+    public Alarm(int day, int hour, int minute, int second, String text, int numSound, boolean on) {
         this.day = day;
         this.hour = hour;
         this.minute = minute;
         this.second = second;
+        this.text = text;
         this.numSound = numSound;
         this.on = on;
-        this.text = text;
     }
     //Getters and Setters
 
