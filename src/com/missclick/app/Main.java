@@ -5,7 +5,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +29,6 @@ public class Main {
         List<String> linesA = Files.readAllLines(pathF, StandardCharsets.UTF_8);
         linesA.addAll(Arrays.asList(lines));
                 
-        Files.write(pathF, linesA, StandardCharsets.UTF_8, StandardOpenOption.CREATE);
     }
     
 }
