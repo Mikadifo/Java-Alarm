@@ -16,6 +16,7 @@ public class FileManager {
     private Path filePath;
     private List<String> fileLines;
     
+    //METODO
     
     private void writeFile(List<String> lines) throws IOException {
         fileLines = Files.readAllLines(filePath, cs);
