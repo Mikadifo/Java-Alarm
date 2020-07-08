@@ -16,6 +16,7 @@ public class Alarm {
     
     //construir
 
+    //doble
     public Alarm() {
     }
 
