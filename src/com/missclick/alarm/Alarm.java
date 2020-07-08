@@ -86,10 +86,5 @@ public class Alarm {
     public void setText(String text) {
         this.text = text;
     }
-    //ToString
-
-    @Override
-    public String toString() {
-        return "Alarm{" + "day=" + day + ", hour=" + hour + ", minute=" + minute + ", second=" + second + ", numSound=" + numSound + ", on=" + on + ", text=" + text + '}';
-    }
+    
 }
