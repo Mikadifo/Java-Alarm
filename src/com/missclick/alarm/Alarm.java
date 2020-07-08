@@ -14,7 +14,7 @@ public class Alarm {
     private boolean on;
     private String text;
     
-    //Constructor
+    //Cons
 
     public Alarm() {
     }
