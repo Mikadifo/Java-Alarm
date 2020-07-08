@@ -48,8 +48,10 @@ public class FileManager {
   
     }
     private List<Alarm> getAlarms() throws IOException{
-       return Files.lines(filePath, UTF_8).map(x ->x.split(";")).map(this::setAlarm).collect(toList());
-       
+       return Files.lines(filePath, UTF_8)
+               .map(x -> x.split(";"))
+               .map(this::setAlarm)
+               .collect(toList());
     }   
     
 }
