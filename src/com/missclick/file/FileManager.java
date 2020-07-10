@@ -18,23 +18,40 @@ import static java.util.stream.Collectors.toList;
 public class FileManager {
     
     private final Charset UTF_8 = StandardCharsets.UTF_8;
-    private final Path filePath;
+    private final Path FILE_PATH;
+    private final String PREFIX;
     
-    public FileManager(Path filePath) {
-        this.filePath = filePath;
+    private List<String> fileLines;
+    
+    public FileManager(Path FILE_PATH, String PREFIX) {
+        this.FILE_PATH = FILE_PATH;
+        this.PREFIX = PREFIX;
     }
     
-    public FileManager(String first, String... more) {
-        this.filePath = Paths.get(first, more);
+    public FileManager(String PREFIX, String first, String... more) {
+        this.FILE_PATH = Paths.get(first, more);
+        this.PREFIX = PREFIX;
     }
     
-    public FileManager(String fileName) {
-        this.filePath = Paths.get(fileName);
+    public FileManager(String fileName, String PREFIX) {
+        this.FILE_PATH = Paths.get(fileName);
+        this.PREFIX = PREFIX;
     }
     
-    private void writeFile(List<String> lines) throws IOException {
-        Files.write(filePath, lines, UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    public void writeFile(List<String> lines) throws IOException {
+        addLines(lines);
+        writeFile();
     }
+    
+    public void writeFile(String line) throws IOException {
+        addLine(line);
+        writeFile();
+    }
+    
+    private void writeFile() throws IOException {
+        Files.write(FILE_PATH, fileLines, UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
     private Alarm setAlarm(String alarmLine[]) {
         return new Alarm(
                 Integer.valueOf(alarmLine[0]),
@@ -44,14 +61,33 @@ public class FileManager {
                 alarmLine[4], 
                 Integer.valueOf(alarmLine[5]), 
                 alarmLine[6].equals("on")
-        ); 
+            ); 
   
     }
-    private List<Alarm> getAlarms() throws IOException{
-       return Files.lines(filePath, UTF_8)
-               .map(x -> x.split(";"))
+    
+    public List<Alarm> getAlarms() throws IOException{
+       return Files.lines(FILE_PATH, UTF_8)
+               .map(this::splitLine)
                .map(this::setAlarm)
                .collect(toList());
     }   
+    
+    private String[] splitLine(String line) {
+        return line.split(PREFIX);
+    }
+    
+    private void addLine(String line) throws IOException {
+        fileLines = getFileLines();
+        fileLines.add(line);
+    }
+    
+    private void addLines(List<String> lines) throws IOException {
+        fileLines = getFileLines();
+        fileLines.addAll(lines);
+    }
+    
+    public List<String> getFileLines() throws IOException {
+        return Files.readAllLines(FILE_PATH, UTF_8);
+    }
     
 }
