@@ -1,5 +1,7 @@
 package com.missclick.alarm;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author missclickTeam
@@ -85,6 +87,15 @@ public class Alarm {
 
     public void setText(String text) {
         this.text = text;
+    }
+    
+    public void sound() {
+        while (on) {
+            Toolkit.getDefaultToolkit().beep();
+            //reemplazar beep por el sonido precargado
+        }
+        
+        //setOn(false);
     }
     
 }
