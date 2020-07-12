@@ -11,32 +11,31 @@ import java.util.List;
  *
  * @author missclickTeam
  */
-public class Alarms implements Runnable {
+public class Alarms extends Thread {
     
-    private final Thread alarmsThread;
     private FileManager alarmFileManager;
     private LocalDateTime now;
     
+    public Alarms() { }
+    
     public Alarms(String name) {
-        this.alarmsThread = new Thread(this, name);
-    }
-    
-    public Alarms() {
-        this.alarmsThread = new Thread(this);
-    }
-    
-    public void start() {
-        this.alarmsThread.start();
+        this.setName(name);
     }
 
     @Override
     public void run() {
-        while (true) {
-            readAlarms().stream()
-                    .filter(this::isTime)
-                    .findFirst()
-                    .get();
-                    //.sound
+        try {
+            while (true) {
+                readAlarms().stream()
+                        .filter(this::isTime)
+                        .findFirst()
+                        .get();
+                        //.sound
+                        
+                this.sleep(500); //set 60000 -> minute
+            }
+        } catch (InterruptedException e) {
+            System.err.println("An interrupted Exception in thread: " + this.getName() + " has been ocurred!!");
         }
     }
     
@@ -58,7 +57,7 @@ public class Alarms implements Runnable {
             ;
     }
     
-    private void sound(Alarm alarm) {
+    private void sound() {
         //empezar la alarma
         //poner en clase alarma
         //turnOff hacer combrobacion cuadno se apague
