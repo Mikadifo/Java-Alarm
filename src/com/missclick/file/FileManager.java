@@ -107,11 +107,9 @@ public class FileManager {
         soundClip.open(sound);
         soundClip.loop(Clip.LOOP_CONTINUOUSLY);
         
-        //while(soundClip.isRunning()) {
         Thread.sleep(1000);
-        //}
         
-        soundClip.close();
+        stop(); //Si no reproduce continuo poner soundClip.close();
     }
     
     public void stop() {
