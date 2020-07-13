@@ -1,12 +1,7 @@
 package com.missclick.alarm;
 
-import java.awt.Toolkit;
+import com.missclick.file.FileManager;
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -15,6 +10,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author missclickTeam
  */
 public class Alarm {
+    private FileManager soundsManager;
+    
     //Attributes
     private int day;
     private int hour;
@@ -27,8 +24,7 @@ public class Alarm {
     //Cons
 
     //doble
-    public Alarm() {
-    }
+    public Alarm() { }
 
     public Alarm(int day, int hour, int minute, int second, String text, int numSound, boolean on) {
         this.day = day;
@@ -98,30 +94,45 @@ public class Alarm {
     }
     
     public void sound() {
-        while (on) {
-            getSound();
-        }
+        setSound(1);
         
-        //setOn(false);
-        //clip.close() //cierra el archivo
+        while (on) {
+            play();
+        }
     }
     
-    private void getSound() { //its may need a new class
-        String dir = "sounds";
-        String file = "Ghost Power.wav";
+    public void stop() {
+        soundsManager.stop();
+        setOn(false);
+    }
+    
+    private void play() {
+        try {
+            soundsManager.play();
+        } catch (LineUnavailableException | IOException | InterruptedException ex) {
+            System.err.println("An error has been ocurred while playing the sound!!");
+        }
+    }
+    
+    private void setSound(int numSound) {
+        switch (numSound) {
+            case 1:
+                soundsManager = new FileManager(null, "sounds", "Ghost Power.wav");
+                break;
+            case 2:
+                //soundsManager = new FileManager(null, "sounds", "Ghost Power.wav");
+                break;
+            case 3:
+                //soundsManager = new FileManager(null, "sounds", "Ghost Power.wav");
+                break;
+            default:
+                //...
+        }   
         
         try {
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(Paths.get(dir, file).toFile()));
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-            
-            while (clip.isRunning()) {
-                Thread.sleep(1000);
-            }
-            
-            clip.close();
-        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException | InterruptedException ex) {
-            System.err.println("EOOROROORO"); //try catch en metodo run
+            soundsManager.setSound();
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+            System.err.println("An error has been ocurred openning the file");
         }
     }
     

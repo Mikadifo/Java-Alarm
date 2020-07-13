@@ -10,12 +10,20 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
  * @author missclickTeam
  */
 public class FileManager {
+    
+    private AudioInputStream sound;
+    private Clip soundClip;
     
     private final Charset UTF_8 = StandardCharsets.UTF_8;
     private final Path FILE_PATH;
@@ -88,6 +96,26 @@ public class FileManager {
     
     public List<String> getFileLines() throws IOException {
         return Files.readAllLines(FILE_PATH, UTF_8);
+    }
+    
+    public void setSound() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+        soundClip = AudioSystem.getClip();
+        sound = AudioSystem.getAudioInputStream(FILE_PATH.toFile());
+    }
+    
+    public void play() throws LineUnavailableException, IOException, InterruptedException {
+        soundClip.open(sound);
+        soundClip.loop(Clip.LOOP_CONTINUOUSLY);
+        
+        while (soundClip.isRunning()) {
+            Thread.sleep(1000);
+        }
+        
+        soundClip.close();
+    }
+    
+    public void stop() {
+        soundClip.close();
     }
     
 }
