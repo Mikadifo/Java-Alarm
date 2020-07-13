@@ -1,6 +1,14 @@
 package com.missclick.alarm;
 
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -91,11 +99,30 @@ public class Alarm {
     
     public void sound() {
         while (on) {
-            Toolkit.getDefaultToolkit().beep();
-            //reemplazar beep por el sonido precargado
+            getSound();
         }
         
         //setOn(false);
+        //clip.close() //cierra el archivo
+    }
+    
+    private void getSound() { //its may need a new class
+        String dir = "sounds";
+        String file = "Ghost Power.wav";
+        
+        try {
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(Paths.get(dir, file).toFile()));
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            
+            while (clip.isRunning()) {
+                Thread.sleep(1000);
+            }
+            
+            clip.close();
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException | InterruptedException ex) {
+            System.err.println("EOOROROORO"); //try catch en metodo run
+        }
     }
     
 }
