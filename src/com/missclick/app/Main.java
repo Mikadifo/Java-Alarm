@@ -1,5 +1,7 @@
 package com.missclick.app;
 
+import com.missclick.alarm.JFCalendario;
+
 /**
  *
  * @author missclickTeam
@@ -7,7 +9,8 @@ package com.missclick.app;
 public class Main {
         
     public static void main(String[] args) {
-        //EL INICIO DE TODO
+        JFCalendario ventana = new JFCalendario();
+        ventana.setVisible(true);
         
     }
     
