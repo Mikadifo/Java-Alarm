@@ -1,4 +1,4 @@
-package com.mikadifo.threads;
+package com.missclick.threads;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,7 +10,6 @@ import java.time.Period;
  */
 public class UseTime extends Thread {
 
-    //Hola
     Thread timer = new Thread();
     LocalDate dateOfBirth;
     LocalDateTime now;
@@ -21,7 +20,6 @@ public class UseTime extends Thread {
         this.dateOfBirth=dateOfBirth;
         this.age = Period.between(dateOfBirth, LocalDate.now());
     }
-    
 
     @Override
     public void run() {

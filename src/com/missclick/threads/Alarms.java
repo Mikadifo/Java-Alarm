@@ -1,4 +1,4 @@
-package com.mikadifo.threads;
+package com.missclick.threads;
 
 import com.missclick.alarm.Alarm;
 import com.missclick.file.FileManager;
@@ -29,8 +29,8 @@ public class Alarms extends Thread {
                 readAlarms().stream()
                         .filter(this::isTime)
                         .findFirst()
-                        .get();
-                        //.sound
+                        .get()
+                        .sound();
                         
                 this.sleep(500); //set 60000 -> minute
             }
@@ -55,12 +55,6 @@ public class Alarms extends Thread {
                 && alarm.getHour() == now.getHour()
                 && alarm.getMinute() == now.getMinute()
             ;
-    }
-    
-    private void sound() {
-        //empezar la alarma
-        //poner en clase alarma
-        //turnOff hacer combrobacion cuadno se apague
     }
     
 }
