@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.missclick.alarm;
 
 import com.missclick.threads.UseTime;
@@ -14,12 +9,12 @@ import java.util.Date;
 
 /**
  *
- * @author Fernanda
+ * @author missclickTeam
  */
 public class JFCalendario extends javax.swing.JFrame {
-    ZoneId defauldZoneId = ZoneId.systemDefault();
-    UseTime ageUse;
     
+    private ZoneId defauldZoneId = ZoneId.systemDefault();
+    private UseTime ageUse;
     
     public JFCalendario() {
         initComponents();
@@ -32,11 +27,8 @@ public class JFCalendario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFAlarma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            System.err.println("Error al cargar el calendario");
         }
-        //</editor-fold>
-        
-        //</editor-fold>
     }
 
     /**
@@ -53,7 +45,7 @@ public class JFCalendario extends javax.swing.JFrame {
         butInicuar = new javax.swing.JButton();
         jCalendar = new com.toedter.calendar.JCalendar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -113,16 +105,16 @@ public class JFCalendario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void butInicuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butInicuarActionPerformed
-        
         Date date = jCalendar.getDate();
         Instant instant = date.toInstant();
         LocalDate localDate = instant.atZone(defauldZoneId).toLocalDate();
-        System.out.println(localDate.getDayOfMonth());
+        
         ageUse = new UseTime(localDate);
         ageUse.start();
+        
         JFAlarma a = new JFAlarma();
         a.setVisible(true);
-        
+        dispose();
     }//GEN-LAST:event_butInicuarActionPerformed
 
    

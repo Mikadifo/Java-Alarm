@@ -10,11 +10,11 @@ import java.time.Period;
  */
 public class UseTime extends Thread {
 
-    Thread timer = new Thread();
-    LocalDate dateOfBirth;
-    LocalDateTime now;
-    LocalDateTime finishTime;
-    Period age;
+    private Thread timer = new Thread();
+    private LocalDate dateOfBirth;
+    private LocalDateTime now;
+    private LocalDateTime finishTime;
+    private Period age;
 
     public UseTime(LocalDate dateOfBirth) {
         this.dateOfBirth=dateOfBirth;

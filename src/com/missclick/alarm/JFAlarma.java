@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.missclick.alarm;
 
 /**
  *
- * @author Fernanda
+ * @author missclickTeam
  */
 public class JFAlarma extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JFAlarma
-     */
     public JFAlarma() {
         initComponents();
         this.setTitle("Alarma");
@@ -43,7 +35,7 @@ public class JFAlarma extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
