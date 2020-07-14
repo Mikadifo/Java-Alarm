@@ -21,9 +21,6 @@ public class Alarm {
     private int numSound;
     private boolean on;
     
-    //Cons
-
-    //doble
     public Alarm() { }
 
     public Alarm(int day, int hour, int minute, int second, String text, int numSound, boolean on) {
@@ -35,8 +32,8 @@ public class Alarm {
         this.numSound = numSound;
         this.on = on;
     }
+    
     //Getters and Setters
-
     public int getDay() {
         return day;
     }
@@ -116,18 +113,21 @@ public class Alarm {
     
     private void setSound(int numSound) {
         switch (numSound) {
-            case 1:
+            case 1: default:
                 soundsManager = new FileManager(null, "sounds", "Ghost Power.wav");
+                
                 break;
             case 2:
-                //soundsManager = new FileManager(null, "sounds", "Ghost Power.wav");
+                soundsManager = new FileManager(null, "sounds", "Wait Music.wav");
+                
                 break;
             case 3:
-                //soundsManager = new FileManager(null, "sounds", "Ghost Power.wav");
+                soundsManager = new FileManager(null, "sounds", "Reggae Drum.wav");
+                
                 break;
-            default:
-                //...
-        }   
+            case 4:
+                soundsManager = new FileManager(null, "sounds", "Drum C.wav");
+    }   
         
         try {
             soundsManager.setSound();
