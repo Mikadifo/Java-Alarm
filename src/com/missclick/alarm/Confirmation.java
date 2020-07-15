@@ -4,11 +4,11 @@ package com.missclick.alarm;
  *
  * @author MIKADIFO
  */
-public class ventana extends javax.swing.JFrame {
+public class Confirmation extends javax.swing.JFrame {
     
     private Alarm alarma;
 
-    public ventana() {
+    public Confirmation() {
         initComponents();
     }
 
@@ -23,7 +23,7 @@ public class ventana extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnApagar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        txtAlarmMessage = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,9 +38,9 @@ public class ventana extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtAlarmMessage.setBackground(new java.awt.Color(51, 51, 51));
+        txtAlarmMessage.setForeground(new java.awt.Color(255, 255, 255));
+        txtAlarmMessage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel3.setBackground(new java.awt.Color(51, 51, 51));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -52,7 +52,7 @@ public class ventana extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtAlarmMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(13, 13, 13))
@@ -66,7 +66,7 @@ public class ventana extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtAlarmMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(28, 28, 28)
                 .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -95,11 +95,15 @@ public class ventana extends javax.swing.JFrame {
     public void setAlarm(Alarm alarma) {
         this.alarma = alarma;
     }
+    
+    public void setMessage(String message) {
+        txtAlarmMessage.setText(message);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagar;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel txtAlarmMessage;
     // End of variables declaration//GEN-END:variables
 }

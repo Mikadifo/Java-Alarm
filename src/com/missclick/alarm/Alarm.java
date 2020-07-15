@@ -12,7 +12,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Alarm {
     
     private FileManager soundsManager;
-    private ventana ven = new ventana();
+    private Confirmation confirmation = new Confirmation();
     
     //Attributes
     private int day;
@@ -85,8 +85,9 @@ public class Alarm {
     public void sound() {
         setSound(numSound);
         
-        ven.setAlarm(this);
-        ven.setVisible(true);
+        confirmation.setMessage(text);
+        confirmation.setAlarm(this);
+        confirmation.setVisible(true);
         
         play();
     }
