@@ -10,24 +10,24 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author missclickTeam
  */
 public class Alarm {
+    
     private FileManager soundsManager;
+    private ventana ven = new ventana();
     
     //Attributes
     private int day;
     private int hour;
     private int minute;
-    private int second;
     private String text;
     private int numSound;
     private boolean on;
     
     public Alarm() { }
 
-    public Alarm(int day, int hour, int minute, int second, String text, int numSound, boolean on) {
+    public Alarm(int day, int hour, int minute, String text, int numSound, boolean on) {
         this.day = day;
         this.hour = hour;
         this.minute = minute;
-        this.second = second;
         this.text = text;
         this.numSound = numSound;
         this.on = on;
@@ -58,14 +58,6 @@ public class Alarm {
         this.minute = minute;
     }
 
-    public int getSecond() {
-        return second;
-    }
-
-    public void setSecond(int second) {
-        this.second = second;
-    }
-
     public int getNumSound() {
         return numSound;
     }
@@ -91,15 +83,16 @@ public class Alarm {
     }
     
     public void sound() {
-        setSound(1);
+        setSound(numSound);
         
-        while (on) {
-            play();
-        }
+        ven.setAlarm(this);
+        ven.setVisible(true);
+        
+        play();
     }
     
     public void stop() {
-        soundsManager.stop();
+        soundsManager.stop(); 
         setOn(false);
     }
     

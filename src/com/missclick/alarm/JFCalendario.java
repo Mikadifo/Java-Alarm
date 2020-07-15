@@ -112,8 +112,8 @@ public class JFCalendario extends javax.swing.JFrame {
         ageUse = new UseTime(localDate);
         ageUse.start();
         
-        JFAlarma a = new JFAlarma();
-        a.setVisible(true);
+        JFAlarma alarms = new JFAlarma();
+        alarms.setVisible(true);
         dispose();
     }//GEN-LAST:event_butInicuarActionPerformed
 

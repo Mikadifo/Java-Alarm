@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
 import javax.sound.sampled.AudioInputStream;
@@ -27,37 +28,29 @@ public class FileManager {
     
     private final Charset UTF_8 = StandardCharsets.UTF_8;
     private final Path FILE_PATH;
-    private final String PREFIX;
-    
-    private List<String> fileLines;
-    
-    public FileManager(Path FILE_PATH, String PREFIX) {
+    private final String SEPARATOR;
+        
+    public FileManager(Path FILE_PATH, String SEPARATOR) {
         this.FILE_PATH = FILE_PATH;
-        this.PREFIX = PREFIX;
+        this.SEPARATOR = SEPARATOR;
     }
     
-    public FileManager(String PREFIX, String first, String... more) {
+    public FileManager(String SEPARATOR, String first, String... more) {
         this.FILE_PATH = Paths.get(first, more);
-        this.PREFIX = PREFIX;
+        this.SEPARATOR = SEPARATOR;
     }
     
-    public FileManager(String fileName, String PREFIX) {
+    public FileManager(String fileName, String SEPARATOR) {
         this.FILE_PATH = Paths.get(fileName);
-        this.PREFIX = PREFIX;
-    }
-    
-    public void writeFile(List<String> lines) throws IOException {
-        addLines(lines);
-        writeFile();
+        this.SEPARATOR = SEPARATOR;
     }
     
     public void writeFile(String line) throws IOException {
-        addLine(line);
-        writeFile();
+        writeFile(Arrays.asList(line));
     }
     
-    private void writeFile() throws IOException {
-        Files.write(FILE_PATH, fileLines, UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    public void writeFile(List<String> lines) throws IOException {
+        Files.write(FILE_PATH, lines, UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 
     private Alarm setAlarm(String alarmLine[]) {
@@ -65,10 +58,9 @@ public class FileManager {
                 Integer.valueOf(alarmLine[0]),
                 Integer.valueOf(alarmLine[1]), 
                 Integer.valueOf(alarmLine[2]), 
-                Integer.valueOf(alarmLine[3]), 
-                alarmLine[4], 
-                Integer.valueOf(alarmLine[5]), 
-                alarmLine[6].equals("on")
+                alarmLine[3], 
+                Integer.valueOf(alarmLine[4]), 
+                alarmLine[5].equals("on")
             ); 
   
     }
@@ -81,17 +73,7 @@ public class FileManager {
     }   
     
     private String[] splitLine(String line) {
-        return line.split(PREFIX);
-    }
-    
-    private void addLine(String line) throws IOException {
-        fileLines = getFileLines();
-        fileLines.add(line);
-    }
-    
-    private void addLines(List<String> lines) throws IOException {
-        fileLines = getFileLines();
-        fileLines.addAll(lines);
+        return line.split(SEPARATOR);
     }
     
     public List<String> getFileLines() throws IOException {
@@ -107,9 +89,12 @@ public class FileManager {
         soundClip.open(sound);
         soundClip.loop(Clip.LOOP_CONTINUOUSLY);
         
-        Thread.sleep(1000);
         
-        stop(); //Si no reproduce continuo poner soundClip.close();
+        while(soundClip.isOpen()) {
+            Thread.sleep(1000);
+        }
+        
+        soundClip.close();
     }
     
     public void stop() {

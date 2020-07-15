@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -13,9 +14,9 @@ import java.util.List;
  */
 public class Alarms extends Thread {
     
-    private FileManager alarmFileManager;
+    private FileManager alarmFileManager = new FileManager(";", "files", "alarms.txt");
     private LocalDateTime now;
-    
+        
     public Alarms() { }
     
     public Alarms(String name) {
@@ -26,13 +27,17 @@ public class Alarms extends Thread {
     public void run() {
         try {
             while (true) {
-                readAlarms().stream()
-                        .filter(this::isTime)
-                        .findFirst()
-                        .get()
-                        .sound();
+                if (!readAlarms().isEmpty()) {
+                    try {
+                        readAlarms().stream()
+                                .filter(this::isTime)
+                                .findFirst()
+                                .get()
+                                .sound();
                         
-                this.sleep(500); //set 60000 -> minute
+                    } catch(NoSuchElementException ex) { }
+                }
+                this.sleep(59999);
             }
         } catch (InterruptedException e) {
             System.err.println("An interrupted Exception in thread: " + this.getName() + " has been ocurred!!");
@@ -44,14 +49,15 @@ public class Alarms extends Thread {
             return alarmFileManager.getAlarms();
         } catch (IOException ex) {
             System.err.println("Error opening the file");
-            return new ArrayList<>();
+            
+            return new ArrayList();
         }
     }
     
     public boolean isTime(Alarm alarm) {
         now = LocalDateTime.now();
-        
-        return alarm.getDay() == now.getDayOfMonth()
+                
+        return alarm.getDay() == now.getDayOfWeek().getValue()
                 && alarm.getHour() == now.getHour()
                 && alarm.getMinute() == now.getMinute()
             ;
