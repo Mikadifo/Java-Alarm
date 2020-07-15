@@ -12,7 +12,6 @@ import java.time.Period;
 public class UseTime extends Thread {
 
     private JFAlarma ventana;
-    private final LocalDate dateOfBirth;
     private LocalDateTime now;
     private LocalDateTime finishTime;
     private final Period age;
