@@ -53,7 +53,8 @@ public class JFCalendario extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Seleccione su fecha de nacimiento: ");
 
-        butInicuar.setForeground(new java.awt.Color(255, 255, 255));
+        butInicuar.setBackground(new java.awt.Color(255, 255, 255));
+        butInicuar.setForeground(new java.awt.Color(0, 0, 0));
         butInicuar.setText("Iniciar");
         butInicuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

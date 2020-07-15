@@ -70,8 +70,9 @@ public class JFAlarma extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre de Alarma :");
 
+        butGuardar.setBackground(new java.awt.Color(255, 255, 255));
         butGuardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        butGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        butGuardar.setForeground(new java.awt.Color(0, 0, 0));
         butGuardar.setText("Guardar Alarma");
         butGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

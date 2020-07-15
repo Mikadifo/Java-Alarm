@@ -30,7 +30,8 @@ public class Confirmation extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        btnApagar.setForeground(new java.awt.Color(255, 255, 255));
+        btnApagar.setBackground(new java.awt.Color(255, 255, 255));
+        btnApagar.setForeground(new java.awt.Color(0, 0, 0));
         btnApagar.setText("Apagar Alarma");
         btnApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
