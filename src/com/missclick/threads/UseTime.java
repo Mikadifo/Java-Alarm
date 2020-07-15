@@ -17,7 +17,6 @@ public class UseTime extends Thread {
     private final Period age;
 
     public UseTime(LocalDate dateOfBirth, JFAlarma ventana) {
-        this.dateOfBirth = dateOfBirth;
         this.age = Period.between(dateOfBirth, LocalDate.now());
         this.ventana = ventana;
     }
