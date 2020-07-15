@@ -62,7 +62,7 @@ public class JFCalendario extends javax.swing.JFrame {
             }
         });
 
-        jCalendar.setForeground(new java.awt.Color(255, 255, 255));
+        jCalendar.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
