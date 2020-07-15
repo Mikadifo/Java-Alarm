@@ -1,5 +1,6 @@
 package com.missclick.threads;
 
+import com.missclick.alarm.JFAlarma;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -10,25 +11,18 @@ import java.time.Period;
  */
 public class UseTime extends Thread {
 
-    private Thread timer = new Thread();
-    private LocalDate dateOfBirth;
+    private JFAlarma ventana;
+    private final LocalDate dateOfBirth;
     private LocalDateTime now;
     private LocalDateTime finishTime;
-    private Period age;
+    private final Period age;
 
-    public UseTime(LocalDate dateOfBirth) {
-        this.dateOfBirth=dateOfBirth;
-        this.age = Period.between(dateOfBirth, LocalDate.now());
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public UseTime(LocalDate dateOfBirth, JFAlarma ventana) {
         this.dateOfBirth = dateOfBirth;
+        this.age = Period.between(dateOfBirth, LocalDate.now());
+        this.ventana = ventana;
     }
-    
+
     @Override
     public void run() {
         now = LocalDateTime.now();
@@ -38,7 +32,7 @@ public class UseTime extends Thread {
             for (;;) {
                 now = LocalDateTime.now();
                 if (now.compareTo(finishTime) == 1) {
-                    System.exit(0);
+                    ventana.dispose();
                 }
             }
 
@@ -50,12 +44,12 @@ public class UseTime extends Thread {
 
                 if (now.compareTo(finishTime) == 1) {
 
-                    System.exit(0);
+                    ventana.dispose();
                 }
 
             }
         }
 
     }
-    
+
 }

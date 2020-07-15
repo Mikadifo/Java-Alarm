@@ -12,13 +12,13 @@ import java.util.Date;
  * @author missclickTeam
  */
 public class JFCalendario extends javax.swing.JFrame {
-    
+
     private ZoneId defauldZoneId = ZoneId.systemDefault();
     private UseTime ageUse;
-    
+
     public JFCalendario() {
         initComponents();
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -108,16 +108,15 @@ public class JFCalendario extends javax.swing.JFrame {
         Date date = jCalendar.getDate();
         Instant instant = date.toInstant();
         LocalDate localDate = instant.atZone(defauldZoneId).toLocalDate();
-        
-        ageUse = new UseTime(localDate);
-        ageUse.start();
-        
         JFAlarma alarms = new JFAlarma();
+        ageUse = new UseTime(localDate, alarms);
+        ageUse.start();
         alarms.setVisible(true);
+
         dispose();
     }//GEN-LAST:event_butInicuarActionPerformed
 
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butInicuar;
     private com.toedter.calendar.JCalendar jCalendar;
